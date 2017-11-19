@@ -4,9 +4,9 @@
 ### Basic
 1. Math
 2. Bit Manipulation
-3. Sort
+3. SortData Structure
 
-### Data Structure
+### 
 1. Array
 2. String
 3. Tree
