@@ -23,12 +23,6 @@ class Solution(object):
         :rtype: List[int]
         """
 
-        def countBits(self, num):
-            """
-            :type num: int
-            :rtype: List[int]
-            """
-
         # 1. 找规律：从1开始，遇到偶数时，其1的个数和该偶数除以2得到的数字的1的个数相同，
         # 遇到奇数时，其1的个数等于该奇数除以2得到的数字的1的个数再加1
         # l = []
@@ -50,7 +44,7 @@ class Solution(object):
         # l = [0]
         #
         # for x in range(1, num + 1):
-        #     l += l[x >> 1] + (x & 1),
+        #     l.append(l[x >> 1] + (x & 1))
         #
         # return l
 
@@ -58,11 +52,9 @@ class Solution(object):
         l = [0]
 
         for x in range(1, num + 1):
-            l += l[x & (x - 1)] + 1,
+            l.append(l[x & (x - 1)] + 1)
 
         return l
-
-
 
 
 if __name__ == '__main__':
