@@ -1,56 +1,53 @@
 # coding: utf-8
 
+from itertools import combinations
+
 '''
-Given an array of integers that is already sorted in ascending order, find two numbers
-such that they add up to a specific target number.
+Given two integers n and k, return all possible combinations of k numbers
+out of 1 ... n.
 
-The function twoSum should return indices of the two numbers such that they add up to
-the target, where index1 must be less than index2. Please note that your returned answers
-(both index1 and index2) are not zero-based.
+For example,
+If n = 4 and k = 2, a solution is:
 
-You may assume that each input would have exactly one solution and you may not use the
-same element twice.
-
-Input: numbers={2, 7, 11, 15}, target=9
-Output: index1=1, index2=2
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
 '''
 
 
 class Solution(object):
-    def twoSum(self, numbers, target):
+    def combine(self, n, k):
         """
-        :type numbers: List[int]
-        :type target: int
-        :rtype: List[int]
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
         """
 
-        # 采用字典存储第一个数的下标
-        # d = {}
-        # l = len(numbers)
+        # 调用库函数，获取组合，c(m, n) = n! / ((n-m)! * m!)
+        # return list(combinations(range(1, n + 1), k))
+
+        # 递归
+        # if k == 0:
+        #     return [[]]
         #
-        # for i in xrange(l):
-        #     d[numbers[i]] = i
-        #
-        # for i in xrange(l):
-        #     if target - numbers[i] in d:
-        #         return [i + 1, d[target - numbers[i]] + 1]
+        # return [pre + [i] for i in range(1, n + 1) for pre in self.combine(i - 1, k - 1)]
 
-        # 采用二分查找，从两点出发
-        l = len(numbers)
-        i, j = 0, l - 1
-
-        while i < j:
-            s = numbers[i] + numbers[j]
-
-            if s < target:
-                i += 1
-            elif s > target:
-                j -= 1
-            else:
-                return [i + 1, j + 1]
+        # c()
 
 
 if __name__ == '__main__':
     solution = Solution()
-    print solution.twoSum([2, 7, 11, 15], 9)
-    assert solution.twoSum([2, 7, 11, 15], 9) == [1, 2]
+    print solution.combine(4, 2)
+    assert solution.combine(4, 2) == [
+        [2, 4],
+        [3, 4],
+        [2, 3],
+        [1, 2],
+        [1, 3],
+        [1, 4],
+    ]

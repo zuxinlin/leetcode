@@ -1,46 +1,43 @@
 # coding: utf-8
 
 '''
-Given two strings representing two complex numbers.
+Given a group of two strings, you need to find the longest uncommon subsequence of
+this group of two strings. The longest uncommon subsequence is defined as the longest
+subsequence of one of these strings and this subsequence should not be any subsequence
+of the other strings.
 
-You need to return a string representing their multiplication. Note i2 = -1
-according to the definition.
+A subsequence is a sequence that can be derived from one sequence by deleting some characters
+without changing the order of the remaining elements. Trivially, any string is a subsequence
+of itself and an empty string is a subsequence of any string.
+
+The input will be two strings, and the output needs to be the length of the longest uncommon
+subsequence. If the longest uncommon subsequence doesn't exist, return -1.
 
 Example 1:
-Input: "1+1i", "1+1i"
-Output: "0+2i"
-Explanation: (1 + i) * (1 + i) = 1 + i2 + 2 * i = 2i, and you need convert
-it to the form of 0+2i.
+Input: "aba", "cdc"
+Output: 3
+Explanation: The longest uncommon subsequence is "aba" (or "cdc"),
+because "aba" is a subsequence of "aba",
+but not a subsequence of any other strings in the group of two strings.
 
-Example 2:
-Input: "1+-1i", "1+-1i"
-Output: "0+-2i"
-Explanation: (1 - i) * (1 - i) = 1 + i2 - 2 * i = -2i, and you need convert
-it to the form of 0+-2i.
 Note:
-
-The input strings will not have extra blank.
-The input strings will be given in the form of a+bi, where the integer a and b
-will both belong to the range of [-100, 100]. And the output should be also in this form.
+Both strings' lengths will not exceed 100.
+Only letters from a ~ z will appear in input strings.
 '''
 
 
 class Solution(object):
-    def complexNumberMultiply(self, a, b):
+    def findLUSlength(self, a, b):
         """
         :type a: str
         :type b: str
-        :rtype: str
+        :rtype: int
         """
 
-        # 转换成数据公式计算
-        j, k = map(int, a[:-1].split('+'))
-        m, n = map(int, b[:-1].split('+'))
-
-        return '{}+{}i'.format(j * m - n * k, j * n + m * k)
+        return -1 if a == b else max(len(a), len(b))
 
 
 if __name__ == '__main__':
     solution = Solution()
-    assert solution.complexNumberMultiply("1+1i", "1+1i") == "0+2i"
-    assert solution.complexNumberMultiply("1+-1i", "1+-1i") == "0+-2i"
+    assert solution.findLUSlength("aba", "cdc") == 3
+    assert solution.findLUSlength("aefawfawfawfaw", "aefawfeawfwafwaef") == 17

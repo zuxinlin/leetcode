@@ -1,62 +1,56 @@
 # coding: utf-8
 
 '''
-Given four lists A, B, C, D of integer values, compute how many tuples (i, j, k, l)
-there are such that A[i] + B[j] + C[k] + D[l] is zero.
+Given an array of integers that is already sorted in ascending order, find two numbers
+such that they add up to a specific target number.
 
-To make problem a bit easier, all A, B, C, D have same length of N where 0 ≤ N ≤ 500.
-All integers are in the range of -228 to 228 - 1 and the result is guaranteed to be at most 231 - 1.
+The function twoSum should return indices of the two numbers such that they add up to
+the target, where index1 must be less than index2. Please note that your returned answers
+(both index1 and index2) are not zero-based.
 
-Example:
-Input:
-A = [ 1, 2]
-B = [-2,-1]
-C = [-1, 2]
-D = [ 0, 2]
+You may assume that each input would have exactly one solution and you may not use the
+same element twice.
 
-Output:
-2
-
-Explanation:
-The two tuples are:
-1. (0, 0, 0, 1) -> A[0] + B[0] + C[0] + D[1] = 1 + (-2) + (-1) + 2 = 0
-2. (1, 1, 0, 0) -> A[1] + B[1] + C[0] + D[0] = 2 + (-1) + (-1) + 0 = 0
+Input: numbers={2, 7, 11, 15}, target=9
+Output: index1=1, index2=2
 '''
 
 
 class Solution(object):
-    def fourSumCount(self, A, B, C, D):
+    def twoSum(self, numbers, target):
         """
-        :type A: List[int]
-        :type B: List[int]
-        :type C: List[int]
-        :type D: List[int]
-        :rtype: int
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
         """
-        # 采用库函数查找
-        # ab = collections.Counter([i + j for i in A for j in B])
+
+        # 采用字典存储第一个数的下标
+        # d = {}
+        # l = len(numbers)
         #
-        # return sum([ab[-i-j] for i in C for j in D])
+        # for i in xrange(l):
+        #     d[numbers[i]] = i
+        #
+        # for i in xrange(l):
+        #     if target - numbers[i] in d:
+        #         return [i + 1, d[target - numbers[i]] + 1]
 
-        # 对半拆开计算，采用字典存储一半的加数结果，然后查找
-        d = {}
-        result = 0
+        # 采用二分查找，从两点出发
+        l = len(numbers)
+        i, j = 0, l - 1
 
-        for i in A:
-            for j in B:
-                temp = i + j
-                d[temp] = 1 if temp not in d else d[temp] + 1
+        while i < j:
+            s = numbers[i] + numbers[j]
 
-        for i in C:
-            for j in D:
-                temp = 0 - i - j
-
-                if temp in d:
-                    result += d[temp]
-
-        return result
+            if s < target:
+                i += 1
+            elif s > target:
+                j -= 1
+            else:
+                return [i + 1, j + 1]
 
 
 if __name__ == '__main__':
     solution = Solution()
-    assert solution.fourSumCount([1, 2], [-2, -1], [-1, 2], [0, 2]) == 2
+    print solution.twoSum([2, 7, 11, 15], 9)
+    assert solution.twoSum([2, 7, 11, 15], 9) == [1, 2]

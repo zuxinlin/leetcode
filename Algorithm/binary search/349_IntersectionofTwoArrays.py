@@ -1,67 +1,30 @@
 # coding: utf-8
 
 '''
-Given a binary tree, find the leftmost value in the last row of the tree.
+Given two arrays, write a function to compute their intersection.
 
-Example 1:
-Input:
+Example:
+Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2].
 
-    2
-   / \
-  1   3
-Output:1
-
-Example 2:
-Input:
-
-        1
-       / \
-      2   3
-     /   / \
-    4   5   6
-       /
-      7
-
-Output:7
-Note: You may assume the tree (i.e., the given root node) is not NULL.
+Note:
+Each element in the result must be unique.
+The result can be in any order.
 '''
 
-
-# Definition for a binary tree node.
-class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
-
-
 class Solution(object):
-    def dfs(self, root, depth, res):
-        if res[1] < depth:
-            res[0] = root.val
-            res[1] = depth
-
-        if root.left:
-            self.dfs(root.left, depth + 1, res)
-
-        if root.right:
-            self.dfs(root.right, depth + 1, res)
-
-        return res[0]
-
-    def findBottomLeftValue(self, root):
+    def intersection(self, nums1, nums2):
         """
-        :type root: TreeNode
-        :rtype: int
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
         """
 
-        return self.dfs(root, 1, [0, 0])
+        # intersection: &;
+        # union: |;
+        # difference: -;
+        return list(set(nums1) & set(nums2))
 
 
 if __name__ == '__main__':
-    root = TreeNode(2)
-    root.left = TreeNode(1)
-    root.right = TreeNode(3)
-    root.right.right = TreeNode(4)
     solution = Solution()
-    print solution.findBottomLeftValue(root)
+    solution.intersection([1, 2, 2, 1], [2, 2]) == [2]

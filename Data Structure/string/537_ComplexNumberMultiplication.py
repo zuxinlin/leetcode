@@ -1,51 +1,46 @@
 # coding: utf-8
 
 '''
-Initially, there is a Robot at position (0, 0). Given a sequence of its moves,
-judge if this robot makes a circle, which means it moves back to the original place.
+Given two strings representing two complex numbers.
 
-The move sequence is represented by a string. And each move is represent by a character.
-The valid robot moves are R (Right), L (Left), U (Up) and D (down). The output should be
-true or false representing whether the robot makes a circle.
+You need to return a string representing their multiplication. Note i2 = -1
+according to the definition.
 
 Example 1:
-Input: "UD"
-Output: true
+Input: "1+1i", "1+1i"
+Output: "0+2i"
+Explanation: (1 + i) * (1 + i) = 1 + i2 + 2 * i = 2i, and you need convert
+it to the form of 0+2i.
 
 Example 2:
-Input: "LL"
-Output: false
+Input: "1+-1i", "1+-1i"
+Output: "0+-2i"
+Explanation: (1 - i) * (1 - i) = 1 + i2 - 2 * i = -2i, and you need convert
+it to the form of 0+-2i.
+Note:
+
+The input strings will not have extra blank.
+The input strings will be given in the form of a+bi, where the integer a and b
+will both belong to the range of [-100, 100]. And the output should be also in this form.
 '''
 
 
 class Solution(object):
-    def judgeCircle(self, moves):
+    def complexNumberMultiply(self, a, b):
         """
-        :type moves: str
-        :rtype: bool
+        :type a: str
+        :type b: str
+        :rtype: str
         """
 
-        # 判断走路过程中是否回到原点，如果回到原点返回true，否则返回false
-        # 其实就是记录垂直和水平方向偏移量是否都为0
+        # 转换成数据公式计算
+        j, k = map(int, a[:-1].split('+'))
+        m, n = map(int, b[:-1].split('+'))
 
-        # h, v = 0, 0
-        #
-        # for i in moves:
-        #     if i == 'U':
-        #         v += 1
-        #     elif i == 'D':
-        #         v -= 1
-        #     elif i == 'L':
-        #         h -= 1
-        #     elif i == 'R':
-        #         h += 1
-        #
-        # return h == 0 and v == 0
-
-        return moves.count("U") == moves.count("D") and moves.count("L") == moves.count("R")
+        return '{}+{}i'.format(j * m - n * k, j * n + m * k)
 
 
 if __name__ == '__main__':
     solution = Solution()
-    assert solution.judgeCircle('UD') == True
-    assert solution.judgeCircle('LL') == False
+    assert solution.complexNumberMultiply("1+1i", "1+1i") == "0+2i"
+    assert solution.complexNumberMultiply("1+-1i", "1+-1i") == "0+-2i"

@@ -1,48 +1,39 @@
 # coding: utf-8
 
 '''
-The Hamming distance between two integers is the number of positions at which the
-corresponding bits are different.Given two integers x and y, calculate the Hamming distance.
-
-Note:
-0 ≤ x, y < 231.
+Calculate the sum of two integers a and b, but you are not allowed
+to use the operator + and -.
 
 Example:
-Input: x = 1, y = 4
-Output: 2
-
-Explanation:
-1   (0 0 0 1)
-4   (0 1 0 0)
-       ↑   ↑
-
-The above arrows point to positions where the corresponding bits are different.
+Given a = 1 and b = 2, return 3.
 '''
 
 
 class Solution(object):
-    def hammingDistance(self, x, y):
+    def getSum(self, a, b):
         """
-        :type x: int
-        :type y: int
+        :type a: int
+        :type b: int
         :rtype: int
         """
 
-        # 两个码字的对应比特取值不同的比特数称为这两个码字的海明距离
-        # 计算方法：对两个位串进行异或（xor）运算，并计算出异或运算结果中1的个数
-        # 算二进制中1的个数：与1做与运算，右移
-        # return bin(x ^ y).count('1')
+        # 对于二进制数的而言，对应位相加就可以使用异或（xor）操作，
+        # 计算进位就可以使用与（and）操作，在下一步进行对应位相加前，对进位数使用移位操作（<<）。
+        # 32 bits integer max
+        MAX = 0x7FFFFFFF
 
-        z = x ^ y
-        distance = 0
+        # 32 bits interger min
+        MIN = 0x80000000
 
-        while z > 0:
-            distance += 1
-            z &= z - 1
+        # mask to get last 32 bits
+        mask = 0xFFFFFFFF
 
-        return distance
+        while b:
+            a, b = (a ^ b) & mask, ((a & b) << 1) & mask
+
+        return a if a <= MAX else ~(a ^ mask)
 
 
 if __name__ == '__main__':
     solution = Solution()
-    assert solution.hammingDistance(1, 4) == 2
+    assert solution.getSum(-2, -1) == -3
