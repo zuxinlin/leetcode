@@ -21,7 +21,7 @@ class Solution(object):
         """
 
         # 不开辟新空间，把0都挪动数组末尾，保证原来数字的顺序
-        # 
+        #
         zero = 0
 
         for i in xrange(len(nums)):
