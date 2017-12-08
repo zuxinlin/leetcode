@@ -10,13 +10,13 @@
 
 ### Data Structure
 
-1. Array
 1. String
-1. Tree
+1. Array
+1. Linked List
 1. Hash Table
 1. Stack
-1. Linked List
 1. Heap
+1. Tree
 
 ### Algorithm
 

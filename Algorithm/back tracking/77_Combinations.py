@@ -33,15 +33,13 @@ class Solution(object):
         """
 
         # 调用库函数，获取组合，c(m, n) = n! / ((n-m)! * m!)
-        return list(combinations(range(1, n + 1), k))
+        # return list(combinations(range(1, n + 1), k))
 
         # 递归
-        # if k == 0:
-        #     return [[]]
-        #
-        # return [pre + [i] for i in range(1, n + 1) for pre in self.combine(i - 1, k - 1)]
-
-        # c()
+        if k == 0:
+            return [[]]
+        
+        return [pre + [i] for i in range(1, n + 1) for pre in self.combine(i - 1, k - 1)]
 
 
 if __name__ == '__main__':
