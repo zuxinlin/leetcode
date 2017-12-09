@@ -1,8 +1,13 @@
 #! /usr/bin/env python
 # coding: utf-8
 """
-阶乘递归和非递归实现
+斐波那契数列
+0 1 1 2 3 5 ...
+公式：f(n) = f(n - 1) + f(n - 2)
 """
+
+# 缓存中间结果
+cache = {}
 
 
 def fibonacci(number):
@@ -11,9 +16,15 @@ def fibonacci(number):
     """
 
     if number <= 1:
+        cache[number] = number
+
         return number
 
-    return fibonacci(number - 1) + fibonacci(number - 2)
+    temp = cache[number - 1] + cache[number - 2]
+    cache[number] = temp
+
+    return temp
+    # return fibonacci(number - 1) + fibonacci(number - 2)
 
 
 def fibonacci_new(number):

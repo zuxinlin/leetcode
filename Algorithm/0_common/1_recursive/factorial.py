@@ -2,7 +2,13 @@
 # coding: utf-8
 """
 阶乘递归和非递归实现
+0 1 2 6 24 ...
+公式：f(n) = f(n - 1) * n
 """
+
+# 缓存中间结果
+cache = {}
+
 
 def factorial(number):
     """
@@ -10,9 +16,16 @@ def factorial(number):
     """
 
     if number <= 1:
+        cache[number] = number
+
         return number
 
-    return number * factorial(number - 1)
+    temp = number * cache[number - 1]
+    cache[number] = temp
+
+    return temp
+    # return number * factorial(n - 1)
+
 
 def factorial_new(number):
     """
@@ -38,7 +51,7 @@ def main():
     for i in xrange(10):
         print factorial(i),
 
-    print
+    print "\n=============================="
 
     for i in xrange(10):
         print factorial_new(i),

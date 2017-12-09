@@ -11,7 +11,7 @@ def permutation(s, start, end):
         s[start], s[i] = s[i], s[start]
 
 def main():
-    s = list('ABCD')
+    s = list('ABC')
     permutation(s, 0, len(s) - 1)
 
 if __name__ == '__main__':
