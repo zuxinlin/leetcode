@@ -4,6 +4,8 @@
 线性查找
 """
 
+from random import sample, randint
+
 
 def find(arr, target):
     """
@@ -12,21 +14,22 @@ def find(arr, target):
 
     for index, ele in enumerate(arr):
         if ele == target:
-            return index
+            return True
 
-    return -1
+    return False
 
 
 def main():
     """
     main执行函数
     """
-
-    arr = [1, 2, 3, 4]
-    assert find(arr, 4) == 3
-    assert find(arr, 5) == -1
+    
+    for _ in xrange(10):
+        arr = sample(range(1, 11), 5)
+        target = randint(1, 10)
+        print arr, target, find(arr, target), target in arr
+        assert find(arr, target) == (target in arr)
 
 
 if __name__ == '__main__':
     main()
-    

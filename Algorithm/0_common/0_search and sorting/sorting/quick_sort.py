@@ -3,6 +3,7 @@
 """
 快速排序
 """
+from random import sample
 
 
 def partition(arr, left, right):
@@ -32,7 +33,6 @@ def quick_sort(arr, left, right):
     """
     快速排序，分治法解决
     """
-
     if left < right:
         mid = partition(arr, left, right)
         quick_sort(arr, left, mid - 1)
@@ -53,9 +53,11 @@ def main():
     main执行函数
     """
 
-    assert sort([5, 4, 3, 2, 1]) == [1, 2, 3, 4, 5]
+    for _ in xrange(10):
+        arr = sample(range(1, 10), 5)
+        print arr, sort(arr)
+        assert sort(arr) == sorted(arr)
 
 
 if __name__ == '__main__':
     main()
-    
