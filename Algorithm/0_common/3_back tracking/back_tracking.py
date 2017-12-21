@@ -145,7 +145,7 @@ def main():
     # counter(3, 2)
     # permutation(4, 2)
     # combination(4, 2)
-    queen(12)
+    queen(4)
     end = time.time()
     print 'take time: %s' % (end - start)
 
