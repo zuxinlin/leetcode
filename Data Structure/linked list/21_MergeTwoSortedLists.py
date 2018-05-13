@@ -9,7 +9,6 @@ Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 Output: 7 -> 0 -> 8
 '''
 
-
 class ListNode(object):
     """
     Definition for singly-linked list.
@@ -19,37 +18,48 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+    def __str__(self):
+        data = []
+        current = self
+
+        while current != None:
+            data.append(str(current.val))
+            current = current.next
+
+        return ' -> '.join(data)
 
 class Solution(object):
-    def addTwoNumbers(self, l1, l2):
+    def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode
         :type l2: ListNode
         :rtype: ListNode
         """
-        root = current = ListNode(0)
-        carry = 0
+        # 建立一个空头结点
+        head = ListNode(0)
+        current = head
 
-        # 只有当l1和l2和进位都为空的时候，循环才退出
-        while l1 or l2 or carry:
-            v1 = v2 = 0
-
-            if l1:
-                v1 = l1.val
+        # 当l1和l2都不为空时，比较两者的值
+        while l1 and l2:
+            if l1.val <= l2.val:
+                current.next = l1
                 l1 = l1.next
-
-            if l2:
-                v2 = l2.val
+            else:
+                current.next = l2
                 l2 = l2.next
-
-            carry, val = divmod(v1 + v2 + carry, 10)
-            current.next = ListNode(val)
+            
             current = current.next
 
-        return root.next
+        if l1:
+            current.next = l1
+
+        if l2:
+            current.next = l2
+
+        return head.next
 
     def createLinkedList(self, list):
-        root = current = ListNode(0)
+        current = root = ListNode(0)
 
         for i in list:
             current.next = ListNode(i)
@@ -60,6 +70,6 @@ class Solution(object):
 
 if __name__ == '__main__':
     solution = Solution()
-    l1 = solution.createLinkedList([2, 4, 3])
-    l2 = solution.createLinkedList([5, 6, 4])
-    print solution.addTwoNumbers(l1, l2)
+    l1 = solution.createLinkedList([2, 3, 4])
+    l2 = solution.createLinkedList([1, 3, 5])
+    print solution.mergeTwoLists(l1, l2)

@@ -35,6 +35,8 @@ def backtracking_recursive(n, m, check, handle):
     n, m决定我们搜索的解空间大小
     n表示每步可选择的状态
     m表示最终方案的元素个数
+    check是冲突检查函数
+    handle是找到解决方案后的处理函数
     """
 
     def dfs(a, k):
@@ -143,9 +145,9 @@ def queen(n):
 def main():
     start = time.time()
     # counter(3, 2)
-    # permutation(4, 2)
+    # permutation(4, 4)
     # combination(4, 2)
-    queen(4)
+    queen(10)
     end = time.time()
     print 'take time: %s' % (end - start)
 

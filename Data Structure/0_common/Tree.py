@@ -132,7 +132,7 @@ class Tree(object):
 
     def last(self, root):
         """
-        中序遍历
+        后序遍历
         """
 
         if root is None:
