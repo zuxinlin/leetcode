@@ -9,7 +9,7 @@ from random import sample
 
 def sort(arr):
     """
-    插入排序，每次都插入到已经排好序的数组，调整位置
+    插入排序(稳定，时间复杂度n^2)，每次都插入到已经排好序的数组，调整位置
     """
     length = len(arr)
 

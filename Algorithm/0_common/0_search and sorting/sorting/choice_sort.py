@@ -9,7 +9,7 @@ from random import sample
 
 def sort(arr):
     """
-    选择排序，每次选择剩下里面最小的放在带排序的位置
+    选择排序(不稳定，时间复杂度n^2)，每次选择剩下里面最小的放在带排序的位置
     """
     length = len(arr)
 

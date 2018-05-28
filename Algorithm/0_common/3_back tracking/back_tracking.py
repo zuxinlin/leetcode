@@ -144,10 +144,12 @@ def queen(n):
 
 def main():
     start = time.time()
+
     # counter(3, 2)
     # permutation(4, 4)
-    # combination(4, 2)
-    queen(10)
+    combination(4, 2)
+    # queen(10)
+
     end = time.time()
     print 'take time: %s' % (end - start)
 

@@ -23,7 +23,7 @@ def main():
     """
     main执行函数
     """
-    
+
     for _ in xrange(10):
         arr = sample(range(1, 11), 5)
         target = randint(1, 10)

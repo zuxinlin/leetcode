@@ -24,6 +24,7 @@ def find(arr, target):
 
     return -1
 
+
 def recursive_find(arr, target, l, r):
     """
     给定一个有序数组和目标数，查找这个数是否在数组中，在的话返回下标，不在返回-1

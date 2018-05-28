@@ -31,7 +31,7 @@ def partition(arr, left, right):
 
 def quick_sort(arr, left, right):
     """
-    快速排序，分治法解决
+    快速排序(不稳定，时间复杂度n^2)，分治法解决
     """
     if left < right:
         mid = partition(arr, left, right)

@@ -17,6 +17,7 @@ Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
 
 Note:
 The input string length won't exceed 1000.
+状态转移方程：dp[i]=dp[i-1] + tmpNum，表示从0到回文数目，tmpNum表示增加了一个字母i后，回文数目是多少。
 '''
 
 

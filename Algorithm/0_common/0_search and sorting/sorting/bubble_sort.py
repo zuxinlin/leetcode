@@ -9,7 +9,7 @@ from random import sample
 
 def sort(arr):
     """
-    冒泡排序，比较前后两个元素，如果前面比后面大，相互交换
+    冒泡排序(稳定，时间复杂度n^2)，比较前后两个元素，如果前面比后面大，相互交换
     """
     length = len(arr)
 

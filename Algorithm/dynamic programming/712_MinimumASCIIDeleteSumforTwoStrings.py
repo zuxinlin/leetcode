@@ -21,6 +21,8 @@ Note:
 
 0 < s1.length, s2.length <= 1000.
 All elements of each string will have an ASCII value in [97, 122].
+
+状态转移方程：dp[i][j] = dp[i-1][j-1] if s1[i] == s2[j] else min(dp[i][j-1] + s2[j], dp[i-1][j] + s2[i])
 '''
 
 
@@ -55,7 +57,8 @@ class Solution(object):
                 if s1[i - 1] == s2[j - 1]:
                     dp[i][j] = dp[i - 1][j - 1]
                 else:
-                    dp[i][j] = min(dp[i - 1][j] + ord(s1[i - 1]), dp[i][j - 1] + ord(s2[j - 1]))
+                    dp[i][j] = min(dp[i - 1][j] + ord(s1[i - 1]),
+                                   dp[i][j - 1] + ord(s2[j - 1]))
 
         return dp[l1 - 1][l2 - 1]
 
@@ -64,4 +67,3 @@ if __name__ == '__main__':
     solution = Solution()
     assert solution.minimumDeleteSum('sea', 'eat') == 231
     assert solution.minimumDeleteSum('delete', 'leet') == 403
-
