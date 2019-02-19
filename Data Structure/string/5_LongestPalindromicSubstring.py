@@ -12,6 +12,9 @@ Note: "aba" is also a valid answer.
 Example:
 Input: "cbbd"
 Output: "bb"
+
+最大回文子串
+1. 分奇数和偶数，分别向两边扩展，o(n*n)
 '''
 
 
@@ -46,7 +49,6 @@ class Solution(object):
         #
         # return s[(max_point - max_len) / 2:(max_len + max_point) / 2 - 1]
 
-
         l = len(s)
 
         # 边界考虑
@@ -57,29 +59,40 @@ class Solution(object):
             return s
 
         # 分字符串长度是奇数，还是偶数，如果已经扫描过最长的，我们只检查是否有比当前最长子串还长的串
-        maxLen, start = 1, 0
+        maxLen, start = 0, 0
 
         for i in range(l):
-            odd = s[i - maxLen - 1:i + 1]
-            even = s[i - maxLen:i + 1]
-
             # 奇数
-            if i - maxLen >= 1 and odd == odd[::-1]:
-                start = i - maxLen - 1
-                maxLen += 2
-                continue
+            left, right = i - 1, i + 1
+
+            while left >= 0 and right < l and s[left] == s[right]:
+                current = right - left
+
+                if current > maxLen:
+                    maxLen = current
+                    start = left
+
+                left -= 1
+                right += 1
 
             # 偶数
-            if i - maxLen >= 0 and even == even[::-1]:
-                start = i - maxLen
-                maxLen += 1
+            left, right = i, i + 1
 
-        return s[start:start + maxLen]
+            while left >= 0 and right < l and s[left] == s[right]:
+                current = right - left
+
+                if current > maxLen:
+                    maxLen = current
+                    start = left
+
+                left -= 1
+                right += 1
+
+        return s[start:start + maxLen + 1]
 
 
 if __name__ == '__main__':
     solution = Solution()
     assert solution.longestPalindrome('cbbd') == 'bb'
-    # assert solution.longestPalindrome('aaa') == 'aaa'
-    # assert solution.longestPalindrome('abc') == 'a'
-
+    assert solution.longestPalindrome('aaa') == 'aaa'
+    assert solution.longestPalindrome('abc') == 'a'

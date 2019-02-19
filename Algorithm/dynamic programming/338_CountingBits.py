@@ -15,6 +15,7 @@ you do it in linear time O(n) /possibly in a single pass? Space complexity shoul
 Can you do it like a boss? Do it without using any builtin function like __builtin_popcount
 in c++ or in any other language.
 
+求给定数字n，从1到n，每个数字含有二进制1个数
 状态转移方程：dp[i] = dp[i/2] + i&1，表示数字为i时，二进制中1的个数
 """
 

@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 # coding: utf-8
+
 """
 Given an array of integers, return indices of the two numbers such that they add
 up to a specific target. You may assume that each input would have exactly one
@@ -9,6 +10,10 @@ Example:
 Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
+
+主题：array & hash table
+题目：求数组内两个数字相加和为一个目标数的下标
+方法1：采用哈希表存储，key是第一个加数，value是第二个加数的下标
 """
 
 
@@ -19,7 +24,6 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-
         # 边界条件判断
         if len(nums) <= 1:
             return False
@@ -36,6 +40,5 @@ class Solution(object):
 
 if __name__ == '__main__':
     solution = Solution()
-    nums = [2, 7, 11, 15]
-    target = 9
-    assert [0, 1] == solution.twoSum(nums, target)
+    # assert [0, 1] == solution.twoSum([2, 7, 11, 15], 9)
+    assert [1, 2] == solution.twoSum([3, 2, 4], 6)

@@ -1,10 +1,13 @@
 #! /usr/bin/env python
 # coding: utf-8
+
 """
 Given an integer, write a function to determine if it is a power of three.
 
 Follow up:
 Could you do it without using any loop / recursion?
+
+求一个数是否是3的幂次方
 """
 
 import sys
@@ -41,4 +44,3 @@ class Solution(object):
 if __name__ == '__main__':
     solution = Solution()
     assert solution.isPowerOfThree(3)
-    

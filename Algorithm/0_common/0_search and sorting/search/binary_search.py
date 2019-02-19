@@ -13,14 +13,14 @@ def find(arr, target):
     left, right = 0, len(arr) - 1
 
     while left <= right:
-        center = (left + right) / 2
+        mid = (left + right) / 2
 
-        if arr[center] == target:
-            return center
-        elif arr[center] < target:
-            left = center + 1
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
         else:
-            right = center - 1
+            right = mid - 1
 
     return -1
 
@@ -31,11 +31,11 @@ def recursive_find(arr, target, l, r):
     """
 
     if l <= r:
-        center = (l + r) / 2
+        mid = (l + r) // 2
 
-        if arr[center] == target:
-            return center
-        elif arr[center] < target:
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
             return recursive_find(arr, target, l + 1, r)
         else:
             return recursive_find(arr, target, l, r - 1)

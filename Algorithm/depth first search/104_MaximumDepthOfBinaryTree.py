@@ -2,29 +2,38 @@
 # coding: utf-8
 
 '''
-Given a binary tree, find the leftmost value in the last row of the tree.
+Given two binary trees, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
 
 Example 1:
-Input:
 
-    2
-   / \
-  1   3
-Output:1
+Input:     1         1
+          / \       / \
+         2   3     2   3
 
+        [1,2,3],   [1,2,3]
+
+Output: true
 Example 2:
-Input:
 
-        1
-       / \
-      2   3
-     /   / \
-    4   5   6
-       /
-      7
+Input:     1         1
+          /           \
+         2             2
 
-Output:7
-Note: You may assume the tree (i.e., the given root node) is not NULL.
+        [1,2],     [1,null,2]
+
+Output: false
+Example 3:
+
+Input:     1         1
+          / \       / \
+         2   1     1   2
+
+        [1,2,1],   [1,1,2]
+
+Output: false
+
 '''
 
 
@@ -37,13 +46,10 @@ class TreeNode(object):
 
 
 class Solution(object):
-    def __init__(self):
-        self.max_depth = 0
-
     def dfs(self, root):
         if root is None:
             return 0
-
+        
         return max(self.dfs(root.left), self.dfs(root.right)) + 1
 
     def maxDepth(self, root):

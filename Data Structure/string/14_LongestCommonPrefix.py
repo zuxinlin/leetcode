@@ -18,6 +18,8 @@ Explanation: There is no common prefix among the input strings.
 Note:
 
 All given inputs are in lowercase letters a-z.
+
+最长公共前缀，先找出最短的字符串，然后从头遍历这个字符串的字符
 '''
 
 

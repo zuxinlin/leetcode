@@ -1,8 +1,11 @@
 #! /usr/env python
 # coding: utf-8
-'''
-Trim a Binary Search Tree
-'''
+
+"""
+Given a binary search tree and the lowest and highest boundaries as L and R, trim the tree so that all its elements lies in [L, R] (R >= L). You might need to change the root of the tree, so the result should return the new root of the trimmed binary search tree.
+
+二叉搜索数，移除所有节点值小于l或者大于r的节点
+"""
 
 
 class TreeNode(object):
@@ -17,10 +20,6 @@ class TreeNode(object):
 
 
 class Solution(object):
-    """
-    Given a binary search tree and the lowest and highest boundaries as L and R, trim the tree so that all its elements lies in [L, R] (R >= L). You might need to change the root of the tree, so the result should return the new root of the trimmed binary search tree.
-    """
-
     def trimBST(self, root, L, R):
         """
         :type root: TreeNode

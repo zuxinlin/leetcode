@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 # coding: utf-8
+
 '''
 Write a program to find the node at which the intersection of two singly linked lists begins.
 
@@ -20,7 +21,11 @@ If the two linked lists have no intersection at all, return null.
 The linked lists must retain their original structure after the function returns.
 You may assume there are no cycles anywhere in the entire linked structure.
 Your code should preferably run in O(n) time and use only O(1) memory.
+
+题目：两个链表交点
+方法：先求两个链表的长度，然后长的那个先走到一样长的地方，然后同时走，两个节点一样时候就是相交
 '''
+
 
 class ListNode(object):
     """
@@ -41,6 +46,7 @@ class ListNode(object):
 
         return ' -> '.join(data)
 
+
 class Solution(object):
     def get_length(self, node):
         count = 0
@@ -48,14 +54,14 @@ class Solution(object):
             node = node.next
             count += 1
 
-        retur count
+        return count
 
     def getIntersectionNode(self, headA, headB):
         """
         :type head1, head1: ListNode
         :rtype: ListNode
         """
-        
+
         if not headA or not headB:
             return None
 
@@ -77,8 +83,6 @@ class Solution(object):
                 headB = headB.next
 
         return None
-
-
 
 
 if __name__ == '__main__':

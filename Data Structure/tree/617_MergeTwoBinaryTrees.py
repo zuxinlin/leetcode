@@ -1,8 +1,15 @@
 #! /usr/env python
 # coding: utf-8
-'''
-Merge Two Binary Trees
-'''
+
+"""
+Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not.
+
+You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of new tree.
+
+Note: The merging process must start from the root nodes of both trees.
+
+合并两颗二叉树
+"""
 
 
 class TreeNode(object):
@@ -17,14 +24,6 @@ class TreeNode(object):
 
 
 class Solution(object):
-    """
-    Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not.
-
-    You need to merge them into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of new tree.
-
-    Note: The merging process must start from the root nodes of both trees.
-    """
-
     def mergeTrees(self, t1, t2):
         """
         :type t1: TreeNode

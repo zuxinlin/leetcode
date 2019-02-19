@@ -1,30 +1,29 @@
 #! /usr/bin/env
 # coding: utf-8
-"""
-Hamming Distance
-"""
+
+'''
+The Hamming distance between two integers is the number of positions at which the
+corresponding bits are different.Given two integers x and y, calculate the Hamming distance.
+
+Note:
+0 ≤ x, y < 231.
+
+Example:
+Input: x = 1, y = 4
+Output: 2
+
+Explanation:
+1   (0 0 0 1)
+4   (0 1 0 0)
+       ↑   ↑
+
+The above arrows point to positions where the corresponding bits are different.
+
+汉明距离，表示两个数二进制不一样位数的个数，采用异或然后结果中1的个数
+'''
 
 
 class Solution(object):
-    '''
-    The Hamming distance between two integers is the number of positions at which the
-    corresponding bits are different.Given two integers x and y, calculate the Hamming distance.
-
-    Note:
-    0 ≤ x, y < 231.
-
-    Example:
-    Input: x = 1, y = 4
-    Output: 2
-
-    Explanation:
-    1   (0 0 0 1)
-    4   (0 1 0 0)
-        ↑   ↑
-
-    The above arrows point to positions where the corresponding bits are different.
-    '''
-
     def hammingDistance(self, x, y):
         """
         :type x: int
