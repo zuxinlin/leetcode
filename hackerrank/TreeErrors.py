@@ -65,4 +65,5 @@ except:
     print 'E1'
 
 class TreeNode(object):
-    def __init__(self, element, left, right)
+    def __init__(self, element, left, right):
+        pass

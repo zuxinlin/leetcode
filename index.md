@@ -12,6 +12,7 @@
 1. [无重复字符的最长子串](leetcode/3.LongestSubstringWithoutRepeatingCharacters.py)
 2. [最大回文子串](leetcode/5.LongestPalindromicSubstring.py)
 3. [Z 字形变换](leetcode/6.ZigZagConversion.py)
+4. [字符串转换整数 (atoi)](leetcode/8.StringToInteger(atoi).py)
 
 ### 1.3 Tree(树)
 
@@ -70,6 +71,7 @@
 
 1. [两数相加](leetcode/2.AddTwoNumbers.py)
 2. [整数反转](leetcode/7.ReverseInteger.py)
+3. [字符串转换整数 (atoi)](leetcode/8.StringToInteger(atoi).py)
 
 ### 3.2 Bit Manipulation(位运算)
 

@@ -22,6 +22,7 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
+        
         max_int = 2**31 - 1
         min_int = -1 * 2**31
 

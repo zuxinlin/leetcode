@@ -1,16 +1,17 @@
 #! /usr/bin/env python
-# coding: utf - 8
-"""
+# coding: utf-8
+
+'''
 x^y计算
-"""
+'''
 
 from random import randint
 
 
 def pow_new(base, number):
-    """
+    '''
     计算x的y次方值
-    """
+    '''
     # 递归退出条件
     if number == 0:
         return 1
@@ -26,9 +27,9 @@ def pow_new(base, number):
 
 
 def main():
-    """
+    '''
     main执行函数
-    """
+    '''
 
     for _ in xrange(10):
         base = randint(1, 10)

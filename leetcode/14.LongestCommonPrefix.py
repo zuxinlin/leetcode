@@ -1,25 +1,14 @@
+#! /usr/bin/env python
 # coding: utf-8
 
 import os
+
 '''
-Write a function to find the longest common prefix string amongst an array of strings.
+题目： 最长公共前缀 https://leetcode-cn.com/problems/longest-common-prefix/
+主题： math & string
 
-If there is no common prefix, return an empty string "".
-
-Example 1:
-
-Input: ["flower","flow","flight"]
-Output: "fl"
-Example 2:
-
-Input: ["dog","racecar","car"]
-Output: ""
-Explanation: There is no common prefix among the input strings.
-Note:
-
-All given inputs are in lowercase letters a-z.
-
-最长公共前缀，先找出最短的字符串，然后从头遍历这个字符串的字符
+解题思路：
+最长公共前缀，先找出最短的字符串，然后从头遍历这个字符串的字符。只要测试验证一个即可
 '''
 
 
