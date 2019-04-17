@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # coding: utf-8
 
-import Queue
+from Queue import Queue
 import sys
 
 '''
@@ -12,10 +12,10 @@ import sys
 class Node(object):
     '''节点'''
 
-    def __init__(self, value=-1, left_child=None, right_child=None, parent=None):
-        self.value = value
-        self.left_child = left_child
-        self.right_child = right_child
+    def __init__(self, val=-1, left=None, right=None, parent=None):
+        self.val = val
+        self.left = left
+        self.right = right
         self.parent = parent
 
 
@@ -26,59 +26,57 @@ class Tree(object):
 
     def __init__(self):
         self.root = Node()
-        self.queue = []
 
     def create_tree(self, data):
         '''
-        根据传入的数组构造一棵树
+        根据传入的数组构造一棵树，利用队列进行层次遍历
         '''
 
         self.root = Node(data[0])
         data = data[1:]
-        self.queue.append(self.root)
+        queue = Queue()
+        queue.put(self.root)
 
-        for (index, _) in enumerate(data[1::2]):
-            current = self.queue.pop(0)
+        for (index, _) in enumerate(data[::2]):
+            cur = queue.get()
 
-            if current.left_child is None:
+            if cur.left is None and data[index * 2]:
                 node = Node(data[index * 2])
-                current.left_child = node
-                self.queue.append(node)
+                cur.left = node
+                queue.put(node)
 
-            if current.right_child is None:
+            if cur.right is None and data[index * 2 + 1]:
                 node = Node(data[index * 2 + 1])
-                current.right_child = node
-                self.queue.append(node)
+                cur.right = node
+                queue.put(node)
 
     def level_traversal(self, root):
         '''
         BFS，层次遍历，队列实现
         '''
 
-        queue = Queue.Queue()  # 创建先进先出队列
+        queue = Queue()  # 创建先进先出队列
         queue.put(root)
 
         while not queue.empty():
-            current = queue.get()  # 弹出第一个元素并打印
-            print current.value, '->',
+            cur = queue.get()  # 弹出第一个元素并打印
+            print cur.val, '->',
 
-            if current.left_child:  # 若该节点存在左子节点,则加入队列（先push左节点）
-                queue.put(current.left_child)
+            if cur.left:  # 若该节点存在左子节点,则加入队列（先push左节点）
+                queue.put(cur.left)
 
-            if current.right_child:  # 若该节点存在右子节点,则加入队列（再push右节点）
-                queue.put(current.right_child)
+            if cur.right:  # 若该节点存在右子节点,则加入队列（再push右节点）
+                queue.put(cur.right)
 
     def preorder_traversal(self, root):
         '''
         DFS，前序遍历递归实现
         '''
 
-        if root is None:
-            return
-
-        print root.value, '->',
-        self.preorder_traversal(root.left_child)
-        self.preorder_traversal(root.right_child)
+        if root:
+            print root.val, '->',
+            self.preorder_traversal(root.left)
+            self.preorder_traversal(root.right)
 
     def preorder_traversal_stack(self, root):
         '''
@@ -88,35 +86,33 @@ class Tree(object):
         if root is None:
             return
 
-        current = root
-        stack = [root]
+        stack = []
+        cur = root
 
-        while stack:
-            print current.value, '->',
+        while cur or stack:
+            if cur:
+                stack.append(cur)
+                print cur.val, '->',
+                cur = cur.left
+            else:
+                cur = stack.pop()
+                cur = cur.right
 
-            if current.right_child:
-                stack.append(current.right_child)
-
-            if current.left_child:
-                stack.append(current.left_child)
-
-            current = stack.pop()
-
-    def inorder(self, root):
+    def inorder_traversal(self, root):
         '''
-        DFS，中序遍历
+        DFS，中序遍历递归实现，时间复杂度O(n)，空间复杂度O(logn)
         '''
 
         if root is None:
             return
 
-        self.inorder(root.left_child)
-        print root.value, '->',
-        self.inorder(root.right_child)
+        self.inorder_traversal(root.left)
+        print root.val, '->',
+        self.inorder_traversal(root.right)
 
-    def inorder_stack(self, root):
+    def inorder_traversal_stack(self, root):
         '''
-        DFS，中序遍历非递归实现
+        DFS，中序遍历非递归实现，时间复杂度O(n)，空间复杂度O(logn)
         '''
 
         if root is None:
@@ -126,15 +122,45 @@ class Tree(object):
         node = root
 
         while node or stack:
-            while node:
+            if node:
                 # 如果当前节点不空，一直访问左子树
                 stack.append(node)
-                node = node.left_child
+                node = node.left
+            else:
+                # 当前节点左子树为空，弹出该节点，并且访问右子树
+                node = stack.pop()
+                print node.val, '->',
+                node = node.right
 
-            # 当前节点左子树为空，弹出该节点，并且访问右子树
-            node = stack.pop()
-            print node.value, '->',
-            node = node.right_child
+    def inorder_traversal_morris(self, root):
+        '''
+        DFS，中序遍历morris，时间复杂度O(n)，空间复杂度O(1)
+        '''
+
+        if root is None:
+            return
+
+        cur = root
+        pre = None
+
+        while cur:
+            if cur.left is None:
+                print cur.val, '->',
+                cur = cur.right
+            else:
+                pre = cur.left
+
+                while pre.right and pre.right != cur:
+                    pre = pre.right
+
+                if pre.right is None:
+                    pre.right = cur
+                    cur = cur.left
+                else:
+                    pre.right = None
+                    print cur.val, '->',
+                    cur = cur.right
+
 
     def post_traversal(self, root):
         '''
@@ -144,16 +170,16 @@ class Tree(object):
         if root is None:
             return
 
-        self.post_traversal(root.left_child)
-        self.post_traversal(root.right_child)
-        print root.value, '->',
+        self.post_traversal(root.left)
+        self.post_traversal(root.right)
+        print root.val, '->',
 
-    def post_traversal_stack(self, root):
+    def post_traversal_two_stack(self, root):
         '''
         DFS，后序遍历非递归
         使用两个栈结构
-        第一个栈进栈顺序：左节点->右节点->根节点
-        第一个栈弹出顺序：根节点->右节点->左节点(先序遍历栈弹出顺序：根->左->右)
+        第一个栈进栈顺序：左 -> 右 -> 根
+        第一个栈弹出顺序：根 -> 右 -> 左 
         第二个栈存储为第一个栈的每个弹出依次进栈
         最后第二个栈依次出栈
         '''
@@ -165,44 +191,40 @@ class Tree(object):
         second_stack = []
 
         while first_stack:
-            current = first_stack.pop()
-            second_stack.append(current)
+            cur = first_stack.pop()
+            second_stack.append(cur)
 
-            if current.left_child:
-                first_stack.append(current.left_child)
+            if cur.left:
+                first_stack.append(cur.left)
 
-            if current.right_child:
-                first_stack.append(current.right_child)
+            if cur.right:
+                first_stack.append(cur.right)
 
         while second_stack:
-            current = second_stack.pop()
-            print current.value, '->',
+            cur = second_stack.pop()
+            print cur.val, '->',
 
     def node_num(self, root):
         '''
         树节点个数
         '''
 
+        # 边界条件
         if root is None:
             return 0
 
-        left_num = self.node_num(root.left_child)
-        right_num = self.node_num(root.right_child)
-
-        return 1 + left_num + right_num
+        return 1 + self.node_num(root.left) + self.node_num(root.right)
 
     def depth(self, root):
         '''
         树深度
         '''
 
+        # 边界条件
         if root is None:
             return 0
 
-        left_depth = self.depth(root.left_child)
-        right_depth = self.depth(root.right_child)
-
-        return max(left_depth, right_depth) + 1
+        return max(self.depth(root.left), self.depth(root.right)) + 1
 
     def is_balance_binary_tree(self, root):
         '''
@@ -212,13 +234,13 @@ class Tree(object):
         if root is None:
             return True
 
-        left_depth = self.depth(root.left_child)
-        right_depth = self.depth(root.right_child)
+        left_depth = self.depth(root.left)
+        right_depth = self.depth(root.right)
 
         if abs(left_depth - right_depth) > 1:
             return False
 
-        return self.is_balance_binary_tree(root.left_child) and self.is_balance_binary_tree(root.right_child)
+        return self.is_balance_binary_tree(root.left) and self.is_balance_binary_tree(root.right)
 
     def is_binary_search_tree(self, root):
         '''
@@ -232,23 +254,25 @@ class Tree(object):
         if root is None:
             return False
 
-        max_value = -1000
+        max_val = -1000
         stack = []
         node = root
 
         while node or stack:
-            if node:
+            while node:
+                # 如果当前节点不空，一直访问左子树
                 stack.append(node)
-                node = node.left_child
+                node = node.left
+
+            # 当前节点左子树为空，弹出该节点，并且访问右子树
+            node = stack.pop()
+
+            if node.val < max_val:
+                return False
             else:
-                node = stack.pop()
+                max_val = node.val
 
-                if node.value > max_value:
-                    return False
-                else:
-                    max_value = node.value
-
-                node = node.left_child
+            node = node.right
 
         return True
 
@@ -266,30 +290,62 @@ class Tree(object):
         if root is None:
             return False
 
-        queue = Queue.Queue()
+        queue = Queue()
         queue.put(root)
         flag = False  # 是否激活判断过程
 
         while not queue.empty():
-            current = queue.get()
+            cur = queue.get()
 
-            if current.left_child:
-                queue.put(current.left_child)
+            if cur.left:
+                queue.put(cur.left)
 
-            if current.right_child:
-                queue.put(current.right_child)
+            if cur.right:
+                queue.put(cur.right)
 
-            if current.left_child is None and current.right_child:
+            if cur.left is None and cur.right:
                 return False
 
             if flag:  # 若过程激活则判断节点是否为叶节点
-                if current.left_child or current.right_child:
+                if cur.left or cur.right:
                     return False
 
-            if not (current.left_child and current.right_child):  # 左不空、右空 | 左空、右空
+            if not (cur.left and cur.right):  # 左不空、右空 | 左空、右空
                 flag = True
 
         return True
+
+    def increasingBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        if root is None:
+            return None
+
+        stack = []
+        result = []
+        cur = root
+
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+
+            cur = stack.pop()
+            result.append(cur)
+            cur = cur.right
+
+        root = result[0]
+        cur = root
+        cur.left = None
+
+        for node in result[1:]:
+            cur.right = node
+            cur.left = None
+            cur = node
+
+        return root
 
 
 def main():
@@ -298,7 +354,7 @@ def main():
     '''
 
     tree = Tree()
-    tree.create_tree(range(1, 10))
+    tree.create_tree([5, 3, 6, 2, 4, None, 8, 1, None, None, None, 7, 9])
     root = tree.root
 
     # 树节点个数和深度
@@ -324,10 +380,13 @@ def main():
 
     # 中序遍历
     print '中序遍历递归：'
-    tree.inorder(root)
+    tree.inorder_traversal(root)
     print
     print '中序遍历非递归：'
-    tree.inorder_stack(root)
+    tree.inorder_traversal_stack(root)
+    print
+    print '中序遍历morris：'
+    tree.inorder_traversal_morris(root)
     print
     print
 
@@ -336,7 +395,7 @@ def main():
     tree.post_traversal(root)
     print
     print '后序遍历非递归：'
-    tree.post_traversal_stack(root)
+    tree.post_traversal_two_stack(root)
 
 
 if __name__ == '__main__':

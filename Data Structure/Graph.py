@@ -76,17 +76,17 @@ class Graph(object):
             return
 
         queue = Queue.Queue()
-        nodeSet = set()
+        visit_set = set()
         queue.put(node)
-        nodeSet.add(node)
+        visit_set.add(node)
 
         while not queue.empty():
             cur = queue.get()               # 弹出元素
             print cur.value, '->',          # 打印元素值
 
             for next in cur.nexts:          # 遍历元素的邻接节点
-                if next not in nodeSet:     # 若邻接节点没有入过队，加入队列并登记
-                    nodeSet.add(next)
+                if next not in visit_set:   # 若邻接节点没有入过队，加入队列并登记
+                    visit_set.add(next)
                     queue.put(next)
 
     def dfs(self, node):
@@ -102,19 +102,19 @@ class Graph(object):
             return
 
         stack = [node]
-        nodeSet = set([node])
+        visit_set = set([node])
         print node.value, '->',
 
-        while len(stack) > 0:
-            cur = stack.pop()              # 弹出最近入栈的节点
+        while stack:
+            cur = stack.pop()                # 弹出最近入栈的节点
 
-            for next in cur.nexts:         # 遍历该节点的邻接节点
-                if next not in nodeSet:    # 如果邻接节点不重复
-                    stack.append(cur)      # 把节点压入
-                    stack.append(next)     # 把邻接节点压入
-                    nodeSet.add(next)      # 登记节点
+            for next in cur.nexts:           # 遍历该节点的邻接节点
+                if next not in visit_set:    # 如果邻接节点不重复
+                    # stack.append(cur)      # 把节点压入
+                    stack.append(next)       # 把邻接节点压入
+                    visit_set.add(next)      # 登记节点
                     print next.value, '->',  # 打印节点值
-                    break                  # 退出，保持深度优先
+                    break                    # 退出，保持深度优先
 
     def prim(self, node):
         '''

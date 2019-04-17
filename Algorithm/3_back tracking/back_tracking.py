@@ -38,8 +38,9 @@ def backtracking_recursive(n, m, check, handle):
     check是冲突检查函数
     handle是找到解决方案后的处理函数
     """
+    a = [0 for _ in range(m)]
 
-    def dfs(a, k):
+    def dfs(k=0):
         """
         深度优先搜，a存储解决方案结果，k是当前深度
         """
@@ -51,10 +52,9 @@ def backtracking_recursive(n, m, check, handle):
                 if k == m - 1:
                     handle(a)
                 else:
-                    dfs(a, k + 1)
+                    dfs(k + 1)
 
-    a = [0 for _ in range(m)]
-    dfs(a, 0)
+    dfs(0)
 
 
 def counter(n, m):
@@ -145,10 +145,19 @@ def queen(n):
 def main():
     start = time.time()
 
-    # counter(3, 2)
-    # permutation(4, 4)
+    counter(3, 2)
+
+    print '排列结果：'
+    permutation(4, 4)
+    print
+
+    print '组合结果：'
     combination(4, 2)
-    # queen(10)
+    print
+
+    print '四皇后：'
+    queen(4)
+    print
 
     end = time.time()
     print 'take time: %s' % (end - start)
