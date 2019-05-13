@@ -53,7 +53,10 @@
 ### 2.1 Dynamic Programming(动态规划)
 
 1. [最大回文子串](leetcode/5.LongestPalindromicSubstring.py)
-2. [最大回文子串](leetcode/121.BestTimeToBuyAndSellStock.py)
+2. [爬楼梯](leetcode/70.ClimbingStairs.py)
+3. [最大回文子串](leetcode/5.LongestPalindromicSubstring.py)
+4. [买卖股票的最佳时机](leetcode/121.BestTimeToBuyAndSellStock.py)
+5. [屋子强盗](leetcode/198.HouseRobber.py)
 
 ### 2.2 Depth First Search(深度优先搜索)
 

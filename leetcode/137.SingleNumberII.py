@@ -1,21 +1,21 @@
 #! /usr/bin/env python
 # coding: utf-8
 
-"""
+'''
 题目： 唯一数字II https://leetcode-cn.com/problems/single-number-ii/
 主题： bit manipulation
 
 解题思路：
 1. 排序
-"""
+'''
 
 
 class Solution(object):
     def singleNumber(self, nums):
-        """
+        '''
         :type nums: List[int]
         :rtype: int
-        """
+        '''
 
         # nums.sort()
         # length = len(nums)

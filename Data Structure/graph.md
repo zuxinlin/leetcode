@@ -2,8 +2,8 @@
 
 ## 图的分类
 
-1. 分为有向图（directed graph）和无向图（underected graph）
-2. 分为有权图（weighted graph）和无权图（unweighted graph），权表示两个节点之间的某种关系
+1. 分为***有向图***（directed graph）和***无向图***（underected graph）
+2. 分为***有权图***（weighted graph）和***无权图***（unweighted graph），权表示两个节点之间的某种关系
 
 ## 图的连通性
 

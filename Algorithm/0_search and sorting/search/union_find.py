@@ -1,55 +1,50 @@
 #! /usr/bin/env python
 # coding: utf-8
 
+import random
 
-class UnionFind(object):
-    """并查集类"""
+
+class UF(object):
+    '''并查集类'''
 
     def __init__(self, n):
-        """长度为n的并查集"""
-        self.uf = [-1 for _ in range(n + 1)]    # 列表0位置空出
-        self.sets_count = n                     # 判断并查集里共有几个集合, 初始化默认互相独立
-
-    # def find(self, p):
-    #     """查找p的根结点(祖先)"""
-    #     r = p                                   # 初始p
-    #     while self.uf[p] > 0:
-    #         p = self.uf[p]
-    #     while r != p:                           # 路径压缩, 把搜索下来的结点祖先全指向根结点
-    #         self.uf[r], r = p, self.uf[r]
-    #     return p
-
-    # def find(self, p):
-    #     while self.uf[p] >= 0:
-    #         p = self.uf[p]
-    #     return p
+        '''长度为n的并查集'''
+        self.uf = [i for i in range(n + 1)]    # 列表0位置空出
+        self.count = n                         # 判断并查集里共有几个集合, 初始化默认互相独立
+        self.rank = [0 for _ in range(n)]      # 权重避免树高度不均衡
 
     def find(self, p):
-        """尾递归"""
-        if self.uf[p] < 0:
-            return p
-        self.uf[p] = self.find(self.uf[p])
-        return self.uf[p]
+        while p != self.uf[p]:
+            self.uf[p] = self.uf[self.uf[p]]  # 路径压缩
+            p = self.uf[p]
+
+        return p
 
     def union(self, p, q):
-        """连通p,q 让q指向p"""
-        proot = self.find(p)
-        qroot = self.find(q)
+        '''连通p,q 让q指向p'''
+        p_root = self.find(p)
+        q_root = self.find(q)
 
-        if proot == qroot:
+        if p_root == q_root:
             return
-        elif self.uf[proot] > self.uf[qroot]:   # 负数比较, 左边规模更小
-            self.uf[qroot] += self.uf[proot]
-            self.uf[proot] = qroot
-        else:
-            self.uf[proot] += self.uf[qroot]  # 规模相加
-            self.uf[qroot] = proot
 
-        self.sets_count -= 1                    # 连通后集合总数减一
+        # 把权重小的挂到权重大的，避免深度太深
+        if self.rank[p_root] < self.rank[q_root]:
+            self.uf[p_root] = q_root
+        elif self.rank[p_root] > self.rank[q_root]:
+            self.uf[q_root] = p_root
+        else:
+            self.uf[p_root] = q_root
+            self.rank[q_root] += 1
+
+        self.count -= 1
 
     def is_connected(self, p, q):
-        """判断pq是否已经连通"""
+        '''判断p和q是否已经连通'''
         return self.find(p) == self.find(q)     # 即判断两个结点是否是属于同一个祖先
+
+    def get_count(self):
+        return self.count
 
 
 def find(data_dict, u):
@@ -74,7 +69,17 @@ def union(data_dict, u, v):
 
 
 def main():
-    pass
+    uf = UF(10)
+    data = [[0, 1], [0, 4], [1, 2], [1, 3], [5, 6], [6, 7], [7, 5], [8, 9]]
+
+    for edge in data:
+        # p, v = random.randint(0, 9), random.randint(0, 9)
+        p, v = edge[0], edge[1]
+        print '[%s, %s],' % (p, v)
+        uf.union(p, v)
+
+    for node in range(10):
+        print 'node: %s, root: %s' % (node, uf.find(node))
 
 
 if __name__ == '__main__':

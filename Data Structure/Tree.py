@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # coding: utf-8
 
-from Queue import Queue
+from collections import deque
 import sys
 
 '''
@@ -34,39 +34,41 @@ class Tree(object):
 
         self.root = Node(data[0])
         data = data[1:]
-        queue = Queue()
-        queue.put(self.root)
+        queue = deque()
+        queue.append(self.root)
 
         for (index, _) in enumerate(data[::2]):
-            cur = queue.get()
+            cur = queue.popleft()
 
             if cur.left is None and data[index * 2]:
                 node = Node(data[index * 2])
                 cur.left = node
-                queue.put(node)
+                queue.append(node)
 
             if cur.right is None and data[index * 2 + 1]:
                 node = Node(data[index * 2 + 1])
                 cur.right = node
-                queue.put(node)
+                queue.append(node)
 
     def level_traversal(self, root):
         '''
         BFS，层次遍历，队列实现
         '''
 
-        queue = Queue()  # 创建先进先出队列
-        queue.put(root)
+        queue = deque()  # 创建先进先出队列
+        queue.append(root)
 
-        while not queue.empty():
-            cur = queue.get()  # 弹出第一个元素并打印
-            print cur.val, '->',
+        while queue:
+            for _ in range(len(queue)):
+                cur = queue.popleft()  # 弹出第一个元素并打印
+                print cur.val,
 
-            if cur.left:  # 若该节点存在左子节点,则加入队列（先push左节点）
-                queue.put(cur.left)
+                if cur.left:  # 若该节点存在左子节点,则加入队列（先push左节点）
+                    queue.append(cur.left)
 
-            if cur.right:  # 若该节点存在右子节点,则加入队列（再push右节点）
-                queue.put(cur.right)
+                if cur.right:  # 若该节点存在右子节点,则加入队列（再push右节点）
+                    queue.append(cur.right)
+            print
 
     def preorder_traversal(self, root):
         '''
@@ -86,17 +88,18 @@ class Tree(object):
         if root is None:
             return
 
-        stack = []
-        cur = root
+        stack, result = [root], []
 
-        while cur or stack:
-            if cur:
-                stack.append(cur)
-                print cur.val, '->',
-                cur = cur.left
-            else:
-                cur = stack.pop()
-                cur = cur.right
+        while stack:
+            cur = stack.pop()
+            result.append(cur.val)
+            print cur.val, '->',
+            
+            if cur.right:
+                stack.append(cur.right)
+                
+            if cur.left:
+                stack.append(cur.left)
 
     def inorder_traversal(self, root):
         '''
@@ -118,19 +121,18 @@ class Tree(object):
         if root is None:
             return
 
-        stack = []
-        node = root
+        stack, cur = [], root
 
-        while node or stack:
-            if node:
+        while cur or stack:
+            if cur:
                 # 如果当前节点不空，一直访问左子树
-                stack.append(node)
-                node = node.left
+                stack.append(cur)
+                cur = cur.left
             else:
                 # 当前节点左子树为空，弹出该节点，并且访问右子树
-                node = stack.pop()
-                print node.val, '->',
-                node = node.right
+                cur = stack.pop()
+                print cur.val, '->',
+                cur = cur.right
 
     def inorder_traversal_morris(self, root):
         '''
@@ -160,7 +162,6 @@ class Tree(object):
                     pre.right = None
                     print cur.val, '->',
                     cur = cur.right
-
 
     def post_traversal(self, root):
         '''
@@ -290,18 +291,18 @@ class Tree(object):
         if root is None:
             return False
 
-        queue = Queue()
-        queue.put(root)
+        queue = deque()
+        queue.append(root)
         flag = False  # 是否激活判断过程
 
-        while not queue.empty():
-            cur = queue.get()
+        while queue:
+            cur = queue.popleft()
 
             if cur.left:
-                queue.put(cur.left)
+                queue.append(cur.left)
 
             if cur.right:
-                queue.put(cur.right)
+                queue.append(cur.right)
 
             if cur.left is None and cur.right:
                 return False

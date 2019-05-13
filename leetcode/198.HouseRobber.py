@@ -2,8 +2,8 @@
 # coding: utf-8
 
 '''
-题目：
-主题：
+题目： 打家劫舍 https://leetcode-cn.com/problems/house-robber/description/
+主题： dynamic programming
 
 解题思路：
 最大抢劫数额，限制是不能抢相邻两家

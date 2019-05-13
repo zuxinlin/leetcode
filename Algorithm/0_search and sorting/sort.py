@@ -68,8 +68,6 @@ def quick_sort(arr):
     快速排序(不稳定，时间复杂度nlogn)，分治法解决
     '''
     def sort(arr, left, right):
-        '''
-        '''
         def partition(arr, left, right):
             '''
             默认把数组第一个元素认为是目标，把所有比他小的放在他前面，所有比他大的放在后面
@@ -104,7 +102,7 @@ def quick_sort(arr):
 
 def merge_sort(arr):
     '''
-    归并排序(稳定，时间复杂度nlgn，空间复杂度n)，分治法解决；
+    归并排序(稳定，时间复杂度nlogn，空间复杂度n)，分治法解决；
     把数组拆成两个数组，分别排序，然后合并起来
     '''
     if len(arr) <= 1:
@@ -168,4 +166,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print reduce(lambda x, y: x * y, range(1, 6))
+    print reduce(lambda x, y: x + y, range(1, 6))
+    print filter(lambda x: x & 1 == 1, range(1, 5))

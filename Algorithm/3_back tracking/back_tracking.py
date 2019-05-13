@@ -139,7 +139,7 @@ def queen(n):
 
         print
 
-    backtracking(n, n, check, handle)
+    backtracking_recursive(n, n, check, handle)
 
 
 def main():

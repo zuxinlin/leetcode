@@ -3,6 +3,7 @@
 
 import Queue
 import sys
+import random
 
 '''
 图
@@ -110,23 +111,51 @@ class Graph(object):
 
             for next in cur.nexts:           # 遍历该节点的邻接节点
                 if next not in visit_set:    # 如果邻接节点不重复
-                    # stack.append(cur)      # 把节点压入
                     stack.append(next)       # 把邻接节点压入
                     visit_set.add(next)      # 登记节点
                     print next.value, '->',  # 打印节点值
                     break                    # 退出，保持深度优先
 
-    def prim(self, node):
+    def prim(self, graph):
         '''
         最小生成树：普里姆算法
         使用贪心的思想，每一步都选权重最小的边
+        所有节点分成两个group，一个为已经选取的selected_node（为list类型），一个为candidate_node，首先任取一个节点加入到selected_node，然后遍历头节点在selected_node，尾节点在candidate_node的边，选取符合这个条件的边里面权重最小的边，加入到最小生成树，选出的边的尾节点加入到selected_node，并从candidate_node删除。直到candidate_node中没有备选节点（这个循环条件要求所有节点都有边连接，即边数要大于等于节点数-1，循环开始前要加入这个条件判断，否则可能会有节点一直在candidate中，导致死循环）
         '''
+        vertex_num = len(graph)
+        INF = float('inf')
+        visit = [False] * vertex_num
+        dist = [INF] * vertex_num  # 访问节点到未访问节点j的最短距离
+        visit[0] = True
 
-        pass
+        # 初始化到顶点0的距离
+        for i in range(vertex_num):
+            dist[i] = graph[0][i]
 
-    def kruskal(self, node):
+        for _ in range(vertex_num-1):
+            min_dist = INF
+            nextIndex = -1
+
+            for j in range(1, vertex_num):
+                if dist[j] < min_dist and not visit[j]:
+                    # 得到到访问顶点到未访问顶点的最短路径以及对应顶点
+                    min_dist = dist[j]
+                    nextIndex = j
+
+            print nextIndex,
+            visit[nextIndex] = True
+
+            for j in range(1, vertex_num):
+                if dist[j] > graph[nextIndex][j] and not visit[j]:
+                    # 此时，访问过的集合里面多了一个顶点，要重新更新最短路径以及对应的顶点
+                    dist[j] = graph[nextIndex][j]
+
+        return dist
+
+    def kruskal(self):
         '''
         最小生成树：克鲁斯卡尔算法
+        先对边按权重从小到大排序，先选取权重最小的一条边，如果该边的两个节点均为不同的分量，则加入到最小生成树，否则计算下一条边，直到遍历完所有的边
         '''
         pass
 
@@ -147,5 +176,31 @@ def main():
     graph.dfs(graph.nodes[1])
 
 
+def create_graph(N=5):
+    graph = [[0]*N for _ in range(N)]
+    INF = float('inf')
+    distance = range(1, 6) + [INF]
+
+    for i in range(N):
+        for j in range(i, N):
+            if i != j:
+                graph[i][j] = distance[random.randint(0, 5)]
+                graph[j][i] = graph[i][j]
+
+    return graph
+
+
+def print_graph(graph):
+    N = len(graph)
+    for i in range(N):
+        for j in range(N):
+            print '%-3s' % graph[i][j],
+        print
+
+
 if __name__ == '__main__':
-    main()
+    # main()
+    data = create_graph()
+    print_graph(data)
+    graph = Graph()
+    print graph.prim(data)

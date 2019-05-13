@@ -2,11 +2,11 @@
 # coding: utf-8
 
 '''
-题目：
-主题：
+题目： 编辑距离 https://leetcode-cn.com/problems/edit-distance/
+主题： string & dynamic programming
 
 解题思路：
-1. 状态转移方程：dp[i] = dp[i-1] + dp[i-2]，斐波那契数列
+1. 状态转移方程：dp(i, j) = dp(i-1, j-1) if s1[i]==s2[j] else min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
 '''
 
 

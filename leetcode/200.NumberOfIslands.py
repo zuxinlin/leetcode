@@ -17,15 +17,14 @@ class Solution(object):
         :type grid: List[List[str]]
         :rtype: int
         """
+        if not grid:
+            return 0
 
-        def bfs(grid):
-            '''
-            广度优先遍历
-            '''
-            if not grid:
-                return 0
+        directions = ((0, 1), (0, -1), (1, 0), (-1, 0))
+        row, column = len(grid), len(grid[0])
 
-            row, column, count = len(grid), len(grid[0]), 0
+        def bfs():
+            count = 0
 
             for i in range(row):
                 for j in range(column):
@@ -41,50 +40,25 @@ class Solution(object):
 
             return count
 
-        def dfs(grid):
-            if not grid:
-                return 0
+        return bfs()
+#         def dfs(i, j):
+#             if i < 0 or i >= row or j < 0 or j >= column or grid[i][j] == '0':
+#                 return
 
-            row, column, count = len(grid), len(grid[0]), 0
+#             grid[i][j] = '0'
 
-            for i in range(row):
-                for j in range(column):
-                    if grid[i][j] == "1":
-                        count += 1
-                        stack = [(i, j)]
+#             for direction in directions:
+#                 dfs(i+direction[0], j+direction[1])
 
-                        while stack:
-                            ii, jj = stack.pop()
 
-                            if 0 <= ii < row and 0 <= jj < column and grid[ii][jj] == "1":
-                                grid[ii][jj] = "0"
-                                stack.extend(
-                                    [(ii+1, jj), (ii-1, jj), (ii, jj+1), (ii, jj-1)])
-        return bfs(grid)
+#         count = 0
+#         for i in range(row):
+#             for j in range(column):
+#                 if grid[i][j] == '1':
+#                     dfs(i, j)
+#                     count += 1
 
-        # return dfs(grid)
-
-        # def dfs_recursive(grid, i, j):
-        #     if 0 <= i < row and 0 <= j < column and grid[i][j] == "1":
-        #         grid[i][j] = "0"
-
-        #     dfs_recursive(grid, i-1, j)
-        #     dfs_recursive(grid, i+1, j)
-        #     dfs_recursive(grid, i, j-1)
-        #     dfs_recursive(grid, i, j+1)
-
-        # if not grid:
-        #     return 0
-
-        # row, column, count = len(grid), len(grid[0]), 0
-
-        # for i in range(row):
-        #     for j in range(column):
-        #         if grid[i][j] == "1":
-        #             count += 1
-        #             dfs_recursive(grid, i, j)
-
-        # return count
+#         return count
 
 
 if __name__ == '__main__':
