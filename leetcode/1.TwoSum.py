@@ -43,9 +43,9 @@ class Solution(object):
             return False
 
         # 以空间换时间，用字典存储，key是第二个加数，value是第一个加数的下标
-        buff_dict, l = {}, len(nums)
+        buff_dict = {}
 
-        for i, first in enumerate(l):
+        for i, first in enumerate(nums):
             if first in buff_dict:
                 return [buff_dict[first], i]
             else:

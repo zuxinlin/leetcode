@@ -46,10 +46,10 @@ class LinkedList(object):
         current = self.root if root is None else root
 
         while current:
-            print current.val, '->' if current.next != None else '',
+            print(current.val, '->' if current.next != None else '', end=' ')
             current = current.next
 
-        print
+        print()
 
 
 class Solution(object):
