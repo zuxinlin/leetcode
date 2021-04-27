@@ -2,7 +2,6 @@
 # coding: utf-8
 
 from collections import deque
-import sys
 
 '''
 树
@@ -61,14 +60,14 @@ class Tree(object):
         while queue:
             for _ in range(len(queue)):
                 cur = queue.popleft()  # 弹出第一个元素并打印
-                print cur.val,
+                print(cur.val,)
 
                 if cur.left:  # 若该节点存在左子节点,则加入队列（先push左节点）
                     queue.append(cur.left)
 
                 if cur.right:  # 若该节点存在右子节点,则加入队列（再push右节点）
                     queue.append(cur.right)
-            print
+            print()
 
     def preorder_traversal(self, root):
         '''
@@ -76,7 +75,7 @@ class Tree(object):
         '''
 
         if root:
-            print root.val, '->',
+            print(root.val, '->',)
             self.preorder_traversal(root.left)
             self.preorder_traversal(root.right)
 
@@ -93,7 +92,7 @@ class Tree(object):
         while stack:
             cur = stack.pop()
             result.append(cur.val)
-            print cur.val, '->',
+            print(cur.val, '->',)
             
             if cur.right:
                 stack.append(cur.right)
@@ -110,7 +109,7 @@ class Tree(object):
             return
 
         self.inorder_traversal(root.left)
-        print root.val, '->',
+        print(root.val, '->',)
         self.inorder_traversal(root.right)
 
     def inorder_traversal_stack(self, root):
@@ -128,11 +127,11 @@ class Tree(object):
                 # 如果当前节点不空，一直访问左子树
                 stack.append(cur)
                 cur = cur.left
-            else:
-                # 当前节点左子树为空，弹出该节点，并且访问右子树
-                cur = stack.pop()
-                print cur.val, '->',
-                cur = cur.right
+
+            # 当前节点左子树为空，弹出该节点，并且访问右子树
+            cur = stack.pop()
+            print(cur.val, '->',)
+            cur = cur.right
 
     def inorder_traversal_morris(self, root):
         '''

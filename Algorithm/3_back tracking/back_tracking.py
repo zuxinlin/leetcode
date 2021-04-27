@@ -73,7 +73,7 @@ def display(solution):
     打印结果
     """
 
-    arr = ['A', 'B', 'C', 'D']
+    arr = ['1', '2', '3', '4']
 
     print ' '.join([arr[solution[i]] for i in range(len(solution))])
 
