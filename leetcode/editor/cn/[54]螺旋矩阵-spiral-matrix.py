@@ -40,6 +40,38 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: List[int]
         """
+        # 边界条件
+        if not matrix or not matrix[0]:
+            return list()
+
+        # 一圈一圈访问
+        top, left, bottom, right = 0, 0, len(matrix) - 1, len(matrix[0]) - 1
+        result = []
+
+        while left <= right and top <= bottom:
+            # 上
+            for column in range(left, right + 1):
+                result.append(matrix[top][column])
+
+            # 右
+            for row in range(top + 1, bottom + 1):
+                result.append(matrix[row][right])
+
+            if left < right and top < bottom:
+                # 下
+                for column in range(right - 1, left, -1):
+                    result.append(matrix[bottom][column])
+
+                # 左
+                for row in range(bottom, top, -1):
+                    result.append(matrix[row][left])
+
+            top += 1
+            left += 1
+            bottom -= 1
+            right -= 1
+
+        return result
 
 
 # leetcode submit region end(Prohibit modification and deletion)

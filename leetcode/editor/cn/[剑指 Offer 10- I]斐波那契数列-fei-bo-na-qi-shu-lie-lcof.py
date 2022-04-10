@@ -40,9 +40,6 @@
 
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution(object):
-    def __init__(self):
-        self.cache = {}
-
     def fib(self, n):
         """
         :type n: int

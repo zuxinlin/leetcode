@@ -54,7 +54,6 @@ class Solution(object):
 
         if head.val != cur.val:
             head.next = cur
-            head.next = cur
 
             return head
         else:

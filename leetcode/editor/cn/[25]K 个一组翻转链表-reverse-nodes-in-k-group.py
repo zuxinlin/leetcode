@@ -73,41 +73,36 @@ class Solution(object):
         :rtype: ListNode
         """
 
-        def reverse(head):
-            if not head or not head.next:
-                return
+        def reverse(head, tail):
+            pre, cur = None, head
 
-            last = reverse(head.next)
-            head.next.next = head
-            head.next = None
+            while pre != tail:
+                next = cur.next
+                cur.next = pre
+                pre, cur = cur, next
 
-            return last
+            return tail, head
 
-        virtual = ListNode(0)
-        virtual.next = head
-        pre = virtual
-        end = virtual
+        hair = ListNode(0)
+        hair.next = head
+        pre = hair
 
-        while end.next:
-            count = 0
-            while end and count < k:
-                end = end.next
-                count += 1
+        while head:
+            tail = pre
+            # 查看剩余部分长度是否大于等于 k
+            for i in range(k):
+                tail = tail.next
+                if not tail:
+                    return hair.next
+            next = tail.next
+            head, tail = reverse(head, tail)
+            # 把子链表重新接回原链表
+            pre.next = head
+            tail.next = next
+            pre = tail
+            head = tail.next
 
-            if not end:
-                break
-
-            start = pre.next
-            next = end.next
-            end.next = None
-            pre.next = reverse(start)
-            start.next = next
-            pre = start
-            end = pre
-
-        return virtual.next
-
-
+        return hair.next
 # leetcode submit region end(Prohibit modification and deletion)
 
 

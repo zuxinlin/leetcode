@@ -64,11 +64,10 @@ class DLinkedNode:
         self.key = key
         self.val = val
         self.pre = None
-        self.tail = None
+        self.next = None
 
 
 class LRUCache(object):
-
     def __init__(self, capacity):
         """
         :type capacity: int

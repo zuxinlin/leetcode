@@ -45,6 +45,7 @@ class Solution(object):
         m, s, n = 0, len(strs[0]), len(strs)
         result = ''
 
+        # 先找出字符串中最短的字符串
         for i in range(1, n):
             c = len(strs[i])
             if c < s:

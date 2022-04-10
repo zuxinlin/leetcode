@@ -62,9 +62,7 @@
 # leetcode submit region begin(Prohibit modification and deletion)
 import collections
 
-
 class MyStack(object):
-
     def __init__(self):
         """
         Initialize your data structure here.

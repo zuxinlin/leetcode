@@ -58,18 +58,13 @@ class Solution(object):
         if not head:
             return
 
-        if not head.next:
-            if n == 1:
-                return
-            else:
-                return head
-
         pre, cur = head, head
 
         # 左右指针，右指针先走n步，考虑边界条件
         for i in range(n):
             cur = cur.next
 
+            # 节点总数小于等于n
             if not cur:
                 if i == n - 1:
                     return head.next
@@ -82,8 +77,6 @@ class Solution(object):
         pre.next = pre.next.next
 
         return head
-
-
 # leetcode submit region end(Prohibit modification and deletion)
 
 

@@ -33,10 +33,11 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
+from collections import deque
 class CQueue(object):
     def __init__(self):
-        self.stack1 = []
-        self.stack2 = []
+        self.stack1 = deque()
+        self.stack2 = deque()
 
     def appendTail(self, value):
         """
